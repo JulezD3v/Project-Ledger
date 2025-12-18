@@ -88,7 +88,7 @@ class Homepage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => SignupPage())
+                        context, MaterialPageRoute(builder: (context) => SignUpScreen())
                         );
                     },
                     style: ElevatedButton.styleFrom(

@@ -1,238 +1,195 @@
 import 'package:flutter/material.dart';
-import 'package:proj_ledger/pages/login_page.dart';
+import 'login_page.dart';
+import '../widgets/input_field.dart';
+import '../widgets/primary_button.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+//MANUAL CHANGES NEEDED
 
-  @override
-  State<SignupPage> createState() => _SignupPageState();
-}
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
-class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).primaryColor;
+
     return Scaffold(
-      backgroundColor: Colors.grey[900],
       body: SafeArea(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 40),
 
-              //Top Icon
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsetsGeometry.only(top: 50.0),
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 8.0),
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[600],
-                      borderRadius: BorderRadius.circular(34.0),
-                    ),
-                    child: const Icon(
-                      Icons.add_business_rounded,
-                      color: Colors.white,
-                      size: 50,
-                    ),
+              // Icon
+              Center(
+                child: Container(
+                  width: 72,
+                  height: 72,
+                  decoration: BoxDecoration(
+                    color: primary.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  child: Icon(Icons.add, color: primary, size: 36),
+                ),
+              ),
+
+              const SizedBox(height: 32),
+
+              // Title
+              const Center(
+                child: Text(
+                  'Create Account',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
 
+              const SizedBox(height: 12),
+
+              const Center(
+                child: Text(
+                  'Join T3xNova for real-time ambulance\ntracking and fleet management.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+
+              const SizedBox(height: 40),
+
+              // Full Name
+              const Text('Full Name',
+                  style: TextStyle(fontWeight: FontWeight.w600)),
+              const SizedBox(height: 8),
+              const InputField(
+                icon: Icons.person_outline,
+                hint: 'John Doe',
+              ),
+
+              const SizedBox(height: 20),
+
+              // Email
+              const Text('Email Address',
+                  style: TextStyle(fontWeight: FontWeight.w600)),
+              const SizedBox(height: 8),
+              const InputField(
+                icon: Icons.mail_outline,
+                hint: 'name@example.com',
+              ),
+
+              const SizedBox(height: 20),
+
+              // Password
+              const Text('Password',
+                  style: TextStyle(fontWeight: FontWeight.w600)),
+              const SizedBox(height: 8),
+              const InputField(
+                icon: Icons.lock_outline,
+                hint: 'Create a password',
+                obscure: true,
+              ),
+
+              const SizedBox(height: 20),
+
+              // Terms
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child:  Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-
-                        // Heading
-                        const Text(
-                          "Create Account",
-                          style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize:
-                                24, // Increased slightly for better hierarchy
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                  Checkbox(value: false, onChanged: (_) {}),
+                  Expanded(
+                    child: RichText(
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.grey),
+                        children: [
+                          const TextSpan(text: 'I agree to the '),
+                          TextSpan(
+                            text: 'Terms of Service',
+                            style: TextStyle(color: primary),
                           ),
-                        ),
-
-                        const SizedBox(height: 8.0),
-
-                        // Sub-heading
-                        const Text(
-                          "Stop guessing. Start tracking.\nThe simplest way to manage your textile inventory.",
-                          style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 14,
-                            color:
-                                Colors.white70, // Fixed: white24 was invisible
-                            height: 1.5, // Adds clean spacing between lines
+                          const TextSpan(text: ' and '),
+                          TextSpan(
+                            text: 'Privacy Policy',
+                            style: TextStyle(color: primary),
                           ),
-                          textAlign: TextAlign.center,
-                          softWrap: true,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis, // Fixed: 'Texto' was a syntax error
-                        ),
-                      ],
+                        ],
                       ),
-                  ), 
+                    ),
+                  )
                 ],
               ),
-              const SizedBox(height: 12.0,),
-              //My form
-              SignUpForm(),
-  
+
+              const SizedBox(height: 24),
+
+              // Create Account button
+              Center(
+                child: PrimaryButton(
+                  text: 'Create Account',
+                  onTap: () {
+                    Navigator.push(
+                      context, MaterialPageRoute(
+                        builder:(_) => const SignInScreen()));
+                  },
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // Divider
+              Center(
+                child: Row(
+                  children: const [
+                    Expanded(child: Divider()),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: Text('OR SIGN UP WITH'),
+                    ),
+                    Expanded(child: Divider()),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // Social buttons (UI only)
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      child: const Text('Google'),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      child: const Text('Apple'),
+                    ),
+                  ),
                 ],
-                  ),
-                ),
-              ), 
+              ),
 
-            
+              const SizedBox(height: 32),
 
-          );
-
-  }
-}
-//Actual Form Creation
-class SignUpForm extends StatelessWidget {
-   SignUpForm({super.key});
-  final TextEditingController _username = TextEditingController();
-  final GlobalKey<FormState>_formkey  = GlobalKey<FormState>();// for validation
-  
- 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-
-
-            Form(
-              key: _formkey,
-              child: TextFormField( //changed to textform feild since its a form
-                controller: _username,
-                autofocus: false,
-                style: TextStyle(
-                  fontFamily: "Poppin",
-                  color: Colors.white
-                ),
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.previous,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value){
-                  //Triggers the validator while typing
-                  if(value == null || value.isEmpty){
-                    return "Empty";
-                  }
-                  return null;
-                },
-                decoration:
-              
-                InputDecoration(
-
-
-                  hintText: "Email",
-                  hintStyle: const TextStyle(color: Colors.white70),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.white)
-                    
-                  ),
-                  
+              // Back to login
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SignInScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('Already have an account? Sign in'),
                 ),
               ),
-            ),
-            const SizedBox(height: 10.0,),
-
-            SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.cyan,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
-                // --- THIS IS WHERE YOU PUT IT ---
-                if (_formkey.currentState!.validate()) { //use .save
-                  // If true: The inputs are Good. Proceed.
-                  print("Validation Successful!");
-                  // Navigator.push(...); 
-                } else {
-                  // If false: The inputs are Bad. Red text appears.
-                  print("Validation Failed!");
-                }
-              },
-              
-              child: const Text("Create Account")
-            ),
-            ),
-            
-            
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-
-            //Button with inkwell
-
-            // InkWell(
-            //   onTap: (){
-            //     print("User request to create account");
-            //     Navigator.push(context,
-            //     MaterialPageRoute(builder:(context)=> LoginPage()));
-            //   },
-            //   child: Text(
-            //     "Create Account",
-            //     style: TextStyle(
-            //       color: Colors.white,
-            //       fontFamily: "Poppins",
-            //       fontSize: 18,
-            //       fontWeight: FontWeight.bold,
-            //       letterSpacing: 1.0
-            //     ),)
-            // ),
-
-
-
-//---Use this GestureDetector when you dont want to be specific ---
-//             GestureDetector(
-//   onTap: () {
-//     print("User clicked Create Account");
-//     // Navigate to the next screen here
-//   },
-//   child: const Text(
-//     "Create Account",
-//     style: TextStyle(
-//       fontFamily: "Poppins",
-//       fontSize: 24,
-//       fontWeight: FontWeight.bold,
-//       color: Colors.white,
-//     ),
-//   ),
-// )
-
- // labelText: "User E-mail",
- // labelStyle: TextStyle(
- //   fontFamily: "Poppins",
- //   fontSize: 20,
- //   fontWeight: FontWeight.w500,
- // ),
- //Same function as the hint
